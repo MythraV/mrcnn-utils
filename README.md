@@ -48,7 +48,6 @@ Ensure tensorflow version you are installing is compatible with system CUDA vers
 and version < 2.0
 
 Edit the following lines pub_obj_masks.py in mask_utils/mask-utils:  
-
 Line 11 PKG_DIR='abspath/to/package/dir' Ex: '/home/isat/Forward/mask_ws/src/mrcnn_utils'
 
 Line 12 WEIGHTS_FNAME='name of weights file' Ex: 'mask_rcnn_peg_0009.h5'
