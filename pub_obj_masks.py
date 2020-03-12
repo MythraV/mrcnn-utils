@@ -1,15 +1,18 @@
 #!/usr/bin/env python
 import os
 import sys
-sys.path.remove('/opt/ros/kinetic/lib/python2.7/dist-packages')
-sys.path.append('/opt/ros/kinetic/lib/python2.7/dist-packages')
 import random
 import math
 import re
 import time
 import numpy as np
 import tensorflow as tf
-sys.path.append('/home/crl/wsps/mrcnn_ws/src/Mask_RCNN')
+
+PKG_DIR='/home/isat/Forward/mask_ws/src/mrcnn_utils'
+WEIGHTS_FNAME = 'mask_rcnn_peg_0009.h5'
+ROOT_DIR = os.path.abspath(PKG_DIR+'/Mask_RCNN')
+sys.path.append(ROOT_DIR)
+
 from mrcnn import utils
 from mrcnn import visualize
 from mrcnn.visualize import display_images
@@ -20,13 +23,10 @@ import rospy
 from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
 from mrcnn_msgs.msg import ObjMasks, BoundingBox
-# Root directory of the project
-ROOT_DIR = os.path.abspath("samples/peg")
-# # Import Mask RCNN
-sys.path.append(ROOT_DIR)  # To find local version of the library
-print(ROOT_DIR)
-import peg
 import cv2
+# Import peg files
+sys.path.append(PKG_DIR+'/mrcnn-utils')
+from peg import peg
 
 class Peg_Detect():
     def __init__(self):
@@ -134,15 +134,12 @@ class Peg_Detect():
 
 if __name__ == '__main__':
     display_mask = False    # Display mask image
-    ROOT_DIR = '/home/crl/wsps/mrcnn_ws/src/Mask_RCNN'
     # Directory to save logs and trained model
     MODEL_DIR = os.path.join(ROOT_DIR, "logs")
     # Path to weights
-    PEG_WEIGHTS_PATH = "/home/crl/wsps/mrcnn_ws/src/Mask_RCNN/logs/peg20190815T1255/mask_rcnn_peg_0009.h5"
+    PEG_WEIGHTS_PATH = ROOT_DIR+'/logs/'+ WEIGHTS_FNAME
 
     config = peg.CustomConfig()
-    print(ROOT_DIR)
-    PEG_DIR = os.path.join(ROOT_DIR, "maskRCNN/Mask_RCNN/samples/peg/dataset")
 
     # Override the training configurations with a few
     # changes for inferencing.
