@@ -9,10 +9,9 @@ pip install opencv-contrib-python
 ```
 
 ### Python3 support for ROS
-This need some compiling from source and some setup changes
-
-Create a mask_ws
-
+Mask_RCNN files are written in python3, so we need to compile ROS package for python3
+compatibilty.  
+Create a ros workspace for Mask_RCNN (mask_ws)  
 Only issue with setting up python3 support for ROS distros before noetic is cv_bridge  
 To do this, follow [this link](https://medium.com/@beta_b0t/how-to-setup-ros-with-python-3-44a69ca36674).
 
